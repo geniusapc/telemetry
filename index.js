@@ -1,8 +1,8 @@
 require('./middlewares/unCaughtErrors');
 const serverless = require('serverless-http');
 const express = require('express');
-
 const debug = require('debug');
+
 const dbConnect = require('./config/db');
 const routes = require('./routes');
 const { PORT, AWS_DEFAULT_REGION } = require('./config/keys');

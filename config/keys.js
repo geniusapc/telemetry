@@ -6,4 +6,5 @@ module.exports = {
   NODE_ENV: env.NODE_ENV,
   MONGODB_URI: env.MONGODB_URI,
   REDIS_URL: env.REDIS_URL,
+  AWS_DEFAULT_REGION: env.AWS_DEFAULT_REGION,
 };

@@ -23,7 +23,8 @@
     "joi": "^17.5.0",
     "mongoose": "^6.1.5",
     "redis": "^4.0.1",
-    "winston": "^3.4.0"
+    "winston": "^3.4.0",
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^19.0.4",

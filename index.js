@@ -1,10 +1,11 @@
 require('./middlewares/unCaughtErrors');
+const serverless = require('serverless-http');
 const express = require('express');
 
 const debug = require('debug');
 const dbConnect = require('./config/db');
 const routes = require('./routes');
-const { PORT } = require('./config/keys');
+const { PORT, AWS_DEFAULT_REGION } = require('./config/keys');
 
 const requiredKeys = require('./middlewares/requiredKeys');
 const startupMiddlewares = require('./middlewares/startUpMiddlewares');
@@ -19,9 +20,13 @@ const main = async () => {
   startupMiddlewares(app);
   await dbConnect();
   routes(app);
-  app.listen(PORT, () => {
-    debugAppStart(`Listening on port ${PORT}`);
-  });
+
+  if (!AWS_DEFAULT_REGION) {
+    app.listen(PORT, () => {
+      debugAppStart(`Listening on port ${PORT}`);
+    });
+  }
 };
 
 main();
+module.exports.handler = serverless(app);

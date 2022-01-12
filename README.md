@@ -1,127 +1,63 @@
-<!--
-title: 'Serverless Framework Node Express API on AWS'
-description: 'This template demonstrates how to develop and deploy a simple Node Express API running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v2
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Telemetric Data API Service
 
-# Serverless Framework Node Express API on AWS
+STAGING URL: [Telemetric](https://2sph6onbva.execute-api.us-east-1.amazonaws.com/).
 
-This template demonstrates how to develop and deploy a simple Node Express API service running on AWS Lambda using the traditional Serverless Framework.
+API DOCUMENTATION: [Postman](https://documenter.getpostman.com/view/19091215/UVXgNdUD).
 
-## Anatomy of the template
 
-This template configures a single function, `api`, which is responsible for handling all incoming requests thanks to the `httpApi` event. To learn more about `httpApi` event configuration options, please refer to [httpApi event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/). As the event is configured in a way to accept all incoming requests, `express` framework is responsible for routing and handling requests internally. Implementation takes advantage of `serverless-http` package, which allows you to wrap existing `express` applications. To learn more about `serverless-http`, please refer to corresponding [GitHub repository](https://github.com/dougmoscrop/serverless-http).
 
-## Usage
+> List of Endpoints
 
-### Deployment
+- Create Telemetric Data.
+- Update Telemetric Data.
+- Get Telemetric Data
+- Delete Telemetric Data
 
-Install dependencies with:
+ ### [Click here](https://documenter.getpostman.com/view/19091215/UVXgNdUD) to see details of these endpoints.
 
-```
-npm install
-```
+---
+## Technologies
 
-and then deploy with:
+- Javascript: Programming language.
 
-```
-serverless deploy
-```
+- NodeJS: JavaScript runtime
 
-After running deploy, you should see output similar to:
+- Express: Nodejs Framework
 
-```bash
-Serverless: Packaging service...
-Serverless: Excluding development dependencies...
-Serverless: Creating Stack...
-Serverless: Checking Stack create progress...
-........
-Serverless: Stack create finished...
-Serverless: Uploading CloudFormation file to S3...
-Serverless: Uploading artifacts...
-Serverless: Uploading service aws-node-express-api.zip file to S3 (711.23 KB)...
-Serverless: Validating template...
-Serverless: Updating Stack...
-Serverless: Checking Stack update progress...
-.................................
-Serverless: Stack update finished...
-Service Information
-service: aws-node-express-api
-stage: dev
-region: us-east-1
-stack: aws-node-express-api-dev
-resources: 12
-api keys:
-  None
-endpoints:
-  ANY - https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  api: aws-node-express-api-dev-api
-layers:
-  None
-```
+- Redis: In-memory data structure store for caching
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [`httpApi` event docs](https://www.serverless.com/framework/docs/providers/aws/events/http-api/).
+- MongoDB: NoSQL Database
 
-### Invocation
+- Lambda: AWS serverless compute service
 
-After successful deployment, you can call the created application via HTTP:
+## Libraries
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
+All third party libraries used on this website can be found in the `package.json`
 
-Which should result in the following response:
 
-```
-{"message":"Hello from root!"}
-```
 
-Calling the `/hello` path with:
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/hello
-```
+## Application Setup
 
-Should result in the following response:
+> Prerequisite:
+- Install `Nodejs` 12.x
+- `Redis` and `Mongodb` connection string
 
-```bash
-{"message":"Hello from path!"}
-```
 
-If you try to invoke a path or method that does not have a configured handler, e.g. with:
+### Start App:
 
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/nonexistent
-```
+- Create a `.env` file on the project folder and add the variables found in `.env.example` 
 
-You should receive the following response:
+-  ``` npm install ```
 
-```bash
-{"error":"Not Found"}
-```
+-  Navigate to the project root directory and run `npm start`
 
-### Local development
 
-It is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+### Deployment:
 
-```bash
-serverless plugin install -n serverless-offline
-```
+> Prerequisite:
+- Install `Docker` and `Serverless`
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
+##### The App can be deployed to `AWS Lambda` by running the   `"serverless deploy"` 
 
-After installation, you can start local emulation with:
 
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
